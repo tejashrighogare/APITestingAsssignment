@@ -15,8 +15,8 @@ public class APIAssignmentGet {
         Response responseVariable = get(productListURL);
         // validate status code
         var statusCodeValue = responseVariable.getStatusCode();
-        given().get("https://automationexercise.com/api/productsList").then().statusCode(200);
         Assert.assertEquals(200, statusCodeValue);
+        System.out.println("status code is "+statusCodeValue);
         //validate content of list
         RestAssured.baseURI = productListURL;
         RequestSpecification specification = RestAssured.given();
@@ -24,7 +24,7 @@ public class APIAssignmentGet {
         ResponseBody body = response.body();
         var bodyContent = body.asString();
         Assert.assertEquals(bodyContent.contains("name"), true);
-        System.out.println("All Product List present in my response");
+        System.out.println("name present in my response");
         //Validate List returned by API
         var getALLProductList = given().when().get(productListURL).then().log().all().toString();
         System.out.println(getALLProductList);
