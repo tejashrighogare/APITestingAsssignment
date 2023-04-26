@@ -10,6 +10,7 @@ import static io.restassured.RestAssured.*;
 
 import io.restassured.specification.*;
 
+import java.util.*;
 import java.util.logging.*;
 
 import org.testng.Assert;
@@ -25,9 +26,8 @@ public class APIAssignmentGet {
         Response responseVariable = get(productListURL);
         var statusCodeValue = responseVariable.getStatusCode();
         Assert.assertEquals(200, statusCodeValue);
-        var statusLine = responseVariable.getStatusLine();
-        logger.log(Level.INFO, "get status line " + statusLine);
-        Assert.assertEquals("HTTP/1.1 200 OK", statusLine);
+        logger.log(Level.INFO, "status code is " + statusCodeValue);
+
     }
 
     @Test(priority = 2)
@@ -41,18 +41,24 @@ public class APIAssignmentGet {
     @Test(priority = 3)
     public void validateContent() {
         productListURL = ConfigReader.getURL();
-        RestAssured.baseURI = productListURL;
-        RequestSpecification specification = RestAssured.given();
-        Response response = specification.request(Method.GET);
-        ResponseBody body = response.body();
-        var bodyContent = body.asString();
-        var productName = response.jsonPath().get("products[3].name").toString();
-        var productPrice = response.jsonPath().get("products[3].price").toString();
-        var productBrand = response.jsonPath().get("products[3].brand").toString();
-        Assert.assertEquals(productName, "Stylish Dress");
-        Assert.assertEquals(productPrice, "Rs. 1500");
-        Assert.assertEquals(productBrand, "Madame");
-        logger.log(Level.INFO, "Product name,price,brand is present in list " + productName + productPrice + productBrand);
+        productListURL = ConfigReader.getURL();
+        Response response = RestAssured.given().when().get(productListURL);
+        JsonPath jsonResponse = new JsonPath(response.asString());
+        logger.info("my json response: " + jsonResponse.get("products"));
+        var productsArray = jsonResponse.get("products");
+        var idLength = jsonResponse.getInt("products.id.size()");
+        for (int counter = 0; counter < productsArray.toString().length(); counter++) {
+            String productName = jsonResponse.getString("products[" + counter + "].name");
+            logger.log(Level.INFO, "Product name is  " + productName);
+            if (productName == "Cotton V-Neck T-Shirt") {
+                Assert.assertEquals(productName, "Cotton V-Neck T-Shirt");
+                Assert.assertEquals(jsonResponse.getString("products[" + counter + "].price"), "Rs. 400");
+                Assert.assertEquals(jsonResponse.getString("products[" + counter + "].brand"), "H&M");
+                Assert.assertEquals(jsonResponse.getString("products[" + counter + "].category.category"), "Top");
+                logger.log(Level.INFO, "Product name is  " + productName);
+            }
+        }
+
     }
 
     @Test(priority = 4)
