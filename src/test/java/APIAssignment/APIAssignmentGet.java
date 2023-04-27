@@ -2,15 +2,11 @@ package APIAssignment;
 
 import dataProvider.*;
 import io.restassured.*;
-import io.restassured.http.*;
 import io.restassured.path.json.*;
 import io.restassured.response.*;
 
 import static io.restassured.RestAssured.*;
 
-import io.restassured.specification.*;
-
-import java.util.*;
 import java.util.logging.*;
 
 import org.testng.Assert;
@@ -49,16 +45,15 @@ public class APIAssignmentGet {
         var idLength = jsonResponse.getInt("products.id.size()");
         for (int counter = 0; counter < productsArray.toString().length(); counter++) {
             String productName = jsonResponse.getString("products[" + counter + "].name");
-            logger.log(Level.INFO, "Product name is  " + productName);
-            if (productName == "Cotton V-Neck T-Shirt") {
-                Assert.assertEquals(productName, "Cotton V-Neck T-Shirt");
+            if (productName.contentEquals("Men Tshirt")) {
+                Assert.assertEquals(productName, "Men Tshirt");
                 Assert.assertEquals(jsonResponse.getString("products[" + counter + "].price"), "Rs. 400");
                 Assert.assertEquals(jsonResponse.getString("products[" + counter + "].brand"), "H&M");
-                Assert.assertEquals(jsonResponse.getString("products[" + counter + "].category.category"), "Top");
+                Assert.assertEquals(jsonResponse.getString("products[" + counter + "].category.category"), "Tshirts");
                 logger.log(Level.INFO, "Product name is  " + productName);
+                break;
             }
         }
-
     }
 
     @Test(priority = 4)
