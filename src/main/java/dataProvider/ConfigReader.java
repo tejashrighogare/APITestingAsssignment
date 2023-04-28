@@ -1,15 +1,17 @@
 package dataProvider;
 
+import org.apache.log4j.*;
+
 import java.io.*;
 import java.util.Properties;
 
 public class ConfigReader {
     private static Properties propertiesObject;
 
-    public static String getURL() {
+    public static String getURL(String propertyName) {
         String configFilePath = System.getProperty("user.dir");
-        Properties configProperties = ConfigReader.readPropertiesFile(configFilePath + "//configuration.properties");
-        return configProperties.getProperty("baseURL");
+        Properties configProperties = ConfigReader.readPropertiesFile(configFilePath + "/configuration.properties");
+        return configProperties.getProperty(propertyName);
     }
 
     public static Properties readPropertiesFile(String fileName) {
