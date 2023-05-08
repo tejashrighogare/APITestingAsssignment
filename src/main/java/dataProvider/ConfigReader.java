@@ -8,7 +8,7 @@ import java.util.Properties;
 public class ConfigReader {
     private static Properties propertiesObject;
 
-    public static String getURL(String propertyName) {
+    public static String getPropertyValue(String propertyName) {
         String configFilePath = System.getProperty("user.dir");
         Properties configProperties = ConfigReader.readPropertiesFile(configFilePath + "/configuration.properties");
         return configProperties.getProperty(propertyName);
