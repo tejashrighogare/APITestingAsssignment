@@ -50,7 +50,15 @@ public class APIAssignmentGet {
         var productName = ConfigReader.getPropertyValue("productName");
         var productPrice = ConfigReader.getPropertyValue("price");
         var productBand = ConfigReader.getPropertyValue("brand");
-        Product objectProduct = new Product(productId, productName, productPrice, productBand);
+        Product objectProduct = new Product();
+        objectProduct.setProductId(productId);
+        objectProduct.setProductName(productName);
+        objectProduct.setProductPrice(productPrice);
+        objectProduct.setProductBrand(productBand);
+        objectProduct.getProductId();
+        objectProduct.getProductName();
+        objectProduct.getProductBrand();
+        objectProduct.getProductPrice();
         getProductData.add(objectProduct);
         for (int index = 0; index < productsArray.size(); index++) {
             String id = jsonResponse.getString("products[" + index + "].id");

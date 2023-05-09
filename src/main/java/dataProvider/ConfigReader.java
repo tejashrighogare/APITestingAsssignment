@@ -15,14 +15,11 @@ public class ConfigReader {
     }
 
     public static Properties readPropertiesFile(String fileName) {
-
         try {
             FileInputStream fileStream = new FileInputStream(fileName);
             propertiesObject = new Properties();
             propertiesObject.load(fileStream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return propertiesObject;
