@@ -17,7 +17,7 @@ import org.testng.annotations.*;
 public class APIAssignmentGet {
 
     private String productListURL = "";
-    private Logger logger = LoggerFactory.getLogger(APIAssignmentGet.class);
+    public Logger logger = LoggerFactory.getLogger(APIAssignmentGet.class);
 
     @Test(priority = 1)
     public void validateStatusCode() {
@@ -56,9 +56,10 @@ public class APIAssignmentGet {
         objectProduct.setProductPrice(productPrice);
         objectProduct.setProductBrand(productBand);
         objectProduct.getProductId();
-        objectProduct.getProductName();
-        objectProduct.getProductBrand();
-        objectProduct.getProductPrice();
+        logger.info(objectProduct.getProductId());
+        logger.info(objectProduct.getProductName());
+        logger.info(objectProduct.getProductBrand());
+        logger.info(objectProduct.getProductPrice());
         getProductData.add(objectProduct);
         for (int index = 0; index < productsArray.size(); index++) {
             String id = jsonResponse.getString("products[" + index + "].id");

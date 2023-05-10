@@ -10,32 +10,32 @@ public class Product {
     public String productPrice;
     public String productBrand;
 
-    public void getProductId() {
-        System.out.println("Id=" + productId);
+    public String getProductId() {
+        return productId;
     }
 
     public void setProductId(String productId) {
         this.productId = productId;
     }
 
-    public void getProductName() {
-        System.out.println("Product Name=" + productName);
+    public String getProductName() {
+        return productName;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public void getProductPrice() {
-        System.out.println("Price=" + productPrice);
+    public String getProductPrice() {
+        return productPrice;
     }
 
     public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
 
-    public void getProductBrand() {
-        System.out.println("Brand=" + productBrand);
+    public String getProductBrand() {
+        return productBrand;
     }
 
     public void setProductBrand(String productBrand) {
