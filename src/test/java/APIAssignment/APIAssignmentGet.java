@@ -17,7 +17,7 @@ import org.testng.annotations.*;
 public class APIAssignmentGet {
 
     private String productListURL = "";
-    public Logger logger = LoggerFactory.getLogger(APIAssignmentGet.class);
+    private Logger logger = LoggerFactory.getLogger(APIAssignmentGet.class);
 
     @Test(priority = 1)
     public void validateStatusCode() {
