@@ -18,12 +18,10 @@ public class ConfigReader {
 
     public static Properties readPropertiesFile(String fileName) {
         try {
-
             FileInputStream fileStream = new FileInputStream(fileName);
             propertiesObject = new Properties();
             propertiesObject.load(fileStream);
         } catch (Exception FileNotFoundException) {
-
             logger.info("File not found exception occurred");
         }
         return propertiesObject;
