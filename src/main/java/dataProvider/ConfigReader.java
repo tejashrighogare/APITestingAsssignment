@@ -21,8 +21,10 @@ public class ConfigReader {
             FileInputStream fileStream = new FileInputStream(fileName);
             propertiesObject = new Properties();
             propertiesObject.load(fileStream);
-        } catch (Exception FileNotFoundException) {
+        } catch (FileNotFoundException e) {
             logger.info("File not found exception occurred");
+        } catch (IOException e) {
+            logger.info("IO exception occurred");
         }
         return propertiesObject;
     }
